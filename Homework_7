@@ -1,0 +1,28 @@
+# Ստեղծել contacts.txt ֆայլ, ավելացնել հետևյալ (First_Name Last_Name, Title, Extension, Email)
+# տեքստը՝ օգտագվելով Python-ի ֆայլային ֆունկցիոնալից։ Ստորև ուղարկում եմ pdf ֆայլ (Business_Proposal.pdf),
+# որի պարունակությունը կարդալով պետք է դուրս բերել AUTHORS: դաշտը իր ենթատողերով
+# և ավելացնել contacts.txt ֆայլում։ Վերջնական պատկերը պետք է լինի հետևյալը
+# First_Name Last_Name, Title, Extension, EmailAUTHORS:
+# Amy Baker, Finance Chair, x345, abaker@ourcompany.com
+# Chris Donaldson, Accounting Dir., x621, cdonaldson@ourcompany.com
+# Erin Freeman, Sr. VP, x879, efreeman@ourcompany.com
+
+
+from PyPDF2 import PdfReader
+file_1 = open("contacts.txt", "a")
+file_1.write("First_Name Last_Name, Title, Extension, Email")
+pdf = PdfReader("Business_Proposal.pdf")
+page_2 = pdf.pages[1].extract_text()
+file_1.write(page_2[8:])
+
+
+
+
+
+
+
+
+
+
+
+
