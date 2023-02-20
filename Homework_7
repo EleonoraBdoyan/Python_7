@@ -14,7 +14,7 @@ file_1.write("First_Name Last_Name, Title, Extension, Email")
 pdf = PdfReader("Business_Proposal.pdf")
 page_2 = pdf.pages[1].extract_text()
 file_1.write(page_2[8:])
-
+file_1.close()
 
 
 
