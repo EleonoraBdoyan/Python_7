@@ -18,6 +18,94 @@ file_1.close()
 
 
 
+# Pdf ֆայլից (US_Declaration.pdf) դուրս բերել նահանգների և մարդկանց անունները և համապատասխանաբար
+# պահել բառարանի մեջ (dict)։
+# Georgia:
+# Button Gwinnett, Lyman Hall, George Walton
+# dict key -> Georgia:
+# dict value -> [Button Gwinnett, Lyman Hall, George Walton]
+from PyPDF2 import PdfReader
+pdf = PdfReader("US_Declaration.pdf")
+print("Number of pages is", len(pdf.pages))
+text = ""
+for i in range(5):
+    pages = pdf.pages[i].extract_text()
+    text += pages
+print("Index of the first state is", text.split(" ").index("Georgia:\n"))
+ls_text = text.split(" ")
+ls_states = ls_text[1365:]
+print("Necessary part of the text\n",ls_states)
+for i in ls_states:
+    if "]" in i:
+        ls_states.remove(i)
+for i in ls_states:
+    if "[" in i:
+        ls_states.remove(i)
+#print(ls_states)
+ls_new = []
+for i in ls_states:
+   ls_new.append(i.strip("\n"))
+print("List that includes states and names\n", ls_new)
+#str_text = " ".join(ls_new)
+#print(str_text)
+name_list = []
+for i in range(len(ls_new)):
+    if ":" in ls_new[i] and ls_new[i-1] == "New" or ls_new[i-1] == "North" or  ls_new[i-1] =="South" or ls_new[i-1] == "Rhode":
+        name_list.append(ls_new[i-1] + " " + ls_new[i])
+    else:
+        name_list.append(ls_new[i])
+for i in name_list:
+    if i == "New" or i == "South" or i == "North" or i == "Rhode":
+        name_list.remove(i)
+dict_keys = []
+for i in range(len(name_list)):
+    if ":" in name_list[i]:
+        dict_keys.append((name_list[i]).strip(":"))
+        name_list[i] = "+"
+print("List that includes names\n", name_list)
+str_text = " ".join(name_list)
+print("String that includes  nmaes\n", str_text)
+new = str_text.split("+")
+value_list =[]
+for i in new:
+    value_list.append(i.strip(" "))
+del value_list[0]
+for i in range(len(value_list)):
+    value_list[i] = value_list[i].replace("  ",",")
+final_dict = {}
+for i in range(len(dict_keys)):
+    final_dict[dict_keys[i]] = value_list[i]
+print("Final dictionary\n", final_dict)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
